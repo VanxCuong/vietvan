@@ -32,14 +32,6 @@ document.addEventListener("DOMContentLoaded",function () {
             return alert('Bạn đã hết lượt click');
         }
         // click đủ 5 lần
-        if(pst.turn ==  1 ){
-            // reset pst
-            // Gán mật khẩu vừa chọn vào input
-            document.getElementById('password').value = pst.password
-            pst = resetPostion()
-            fixedBanner.classList.remove("show")
-            return
-        }
         let { password } = pst
         if(pst.turn == 5){
             // khi là lần đầu tiên: chỉ gán vị trí hiện tại
@@ -56,6 +48,14 @@ document.addEventListener("DOMContentLoaded",function () {
             // gán tọa độ vị trí hiện tại
             pst.clientX = e.clientX
             pst.clientY = e.clientY
+            if(pst.turn ==  1 ){
+                // reset pst
+                // Gán mật khẩu vừa chọn vào input
+                document.getElementById('password').value = pst.password
+                pst = resetPostion()
+                fixedBanner.classList.remove("show")
+                return
+            }
         }
         pst.turn-- // Giảm 1 lượt khi click
         turnChoose.innerHTML = pst.turn // show turn
