@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Web</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/vendor/bootstrap.css">
+  </head>
+  <body>
+    <div style="width: 100%;height: 100%;display: flex;justify-content: center;align-items: center;">
+        <form method="post" action="" style="width: 40%;padding: 20px;border: 1px solid #e5d4d4;">
+            <div style="text-align: center;font-size: 18px;padding: 10px 0;color: #0275d8;font-weight: bold;">Kết nối với chúng tôi</div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Tên đăng nhập</label>
+              <input type="text" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Mật khẩu</label>
+              <div class="col-auto">
+                <div class="input-group">
+                  <input type="password" class="form-control" name="password" id="password" placeholder="Username">
+                  <div class="input-group-prepend" style="min-width: 50px;border: 1px solid #0275d8;background: #0275d8;cursor: pointer;">
+                    <div id="pwtouch" class="input-group-text" style="color: white;font-weight: 500;font-size: 14px;padding: 5px 10px;line-height: 31px;">PW TOUCH</div>
+                  </div>
+                </div>
+              </div>
+              <div style="text-align: center;color: #de2020;padding: 5px;"><%= errors %></div>
+            </div>
+            <div class="text-xs-center">
+              <button type="submit" class="btn btn-primary">Đăng nhập</button>
+            </div>
+          </form>
+    </div>
+    <div class="cf-wh fixed-banner" id="fixed-banner">
+      <div id="isChoose">5</div>
+      <div id="test" style="position:absolute;"></div>
+      <div class="cf-wh fixed-banner-center" id="choosePassword">
+        Chọn 5 điểm để nhận mật khẩu
+      </div>
+      <div class="f-actions">
+        <button id="btn-reset">Làm mới</button>
+        <button id="btn-close">Thoát</button>
+      </div>
+    </div>
+    <script src="/javascripts/choose.js"></script>
+    <script src="/vendor/bootstrap.js"></script>
+  </body>
+</html>
