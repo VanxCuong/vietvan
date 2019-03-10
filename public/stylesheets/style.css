@@ -28,7 +28,7 @@ body,html,.cf-wh{
   color: #3f51b5;
   font-size: 24px;
 }
-#isChoose{
+#isChoose,#isChoose-rep{
   font-size: 18px;
   padding: 20px;
   position: absolute;

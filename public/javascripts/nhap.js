@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded",function () {
-    let ChoosePassword = document.getElementById("choosePassword") // Khung chọn mật khẩu
-    let fixedBanner = document.getElementById("fixed-banner") // Khung chọn mật khẩu
-    let ChooseResetPassword = document.getElementById("btn-reset") // reset chọn mật khẩu
-    let ChooseClosePassword = document.getElementById("btn-close") // Thoát khung chọn mk
-    let turnChoose = document.getElementById("isChoose") // số lượng click
-    let test = document.getElementById("test")
+    let ChoosePassword = document.getElementById("choosePasswordRep") // Khung chọn mật khẩu
+    let fixedBanner = document.getElementById("fixed-banner-rep") // Khung chọn mật khẩu
+    let ChooseResetPassword = document.getElementById("btn-reset-rep") // reset chọn mật khẩu
+    let ChooseClosePassword = document.getElementById("btn-close-rep") // Thoát khung chọn mk
+    let turnChoose = document.getElementById("isChoose-rep") // số lượng click
+    let test = document.getElementById("test-rep")
     let pst = resetPostion()
-    let pwtouchRep = document.getElementById("pwtouchRep") // Click pwtour de hien thi khung chon mk
-    pwtouchRep.addEventListener("click",function(e){
+    let pwtouch = document.getElementById("pwtouchRep") // Click pwtour de hien thi khung chon mk
+    pwtouch.addEventListener("click",function(e){
         turnChoose.innerHTML = pst.turn // show turn
         fixedBanner.classList.add("show")
     })
