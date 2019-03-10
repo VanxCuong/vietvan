@@ -22,7 +22,7 @@ router.get('/register', (req, res) => {
 router.post('/register', validators , async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty())
-    return res.status(422).json({ message:Message.MESSING_DATA });
+    return res.render("register", {errors:'Bạn vui lòng nhập đầy đủ thông tin'})
   try {
     if(req.body.password !== req.body.passwordRep)
       return res.render("register", {errors:'Xác nhận mật khẩu không hợp lệ'})
@@ -43,9 +43,9 @@ router.post('/login',
   passport.authenticate('local'),
   function(req, res) {
     if (!req.user) {
-        return res.render('login', {errors:'Tài khoản không hợp lệ'});
+        return res.status(401).json({message:'Tài khoản không hợp lệ'});
     }
-    return res.redirect('/');;
+    return res.status(200).json(req.user);
 });
 // logout
 router.get('/logout', function(req, res){

@@ -7,28 +7,28 @@
   </head>
   <body>
     <div style="width: 100%;height: 100%;display: flex;justify-content: center;align-items: center;">
-        <form method="post" action="" style="width: 40%;padding: 20px;border: 1px solid #e5d4d4;">
+        <div style="width: 40%;padding: 20px;border: 1px solid #e5d4d4;">
             <div style="text-align: center;font-size: 18px;padding: 10px 0;color: #0275d8;font-weight: bold;">Kết nối với chúng tôi</div>
             <div class="form-group">
-              <label for="exampleInputEmail1">Tên đăng nhập</label>
-              <input type="text" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+              <label for="username">Tên đăng nhập</label>
+              <input type="text" class="form-control"  id="username" aria-describedby="emailHelp" placeholder="Tài khoản">
             </div>
             <div class="form-group">
-              <label for="exampleInputPassword1">Mật khẩu</label>
+              <label for="password">Mật khẩu</label>
               <div class="col-auto">
                 <div class="input-group">
-                  <input type="password" class="form-control" name="password" id="password" placeholder="Username">
+                  <input type="password" class="form-control" id="password" placeholder="Mật khẩu">
                   <div class="input-group-prepend" style="min-width: 50px;border: 1px solid #0275d8;background: #0275d8;cursor: pointer;">
                     <div id="pwtouch" class="input-group-text" style="color: white;font-weight: 500;font-size: 14px;padding: 5px 10px;line-height: 31px;">PW TOUCH</div>
                   </div>
                 </div>
               </div>
-              <div style="text-align: center;color: #de2020;padding: 5px;"><%= errors %></div>
+              <div id="checkErrorLogin" style="text-align: center;color: #de2020;padding: 5px;"></div>
             </div>
             <div class="text-xs-center">
-              <button type="submit" class="btn btn-primary">Đăng nhập</button>
+              <div class="btn btn-primary" id="login_now">Đăng nhập</div>
             </div>
-          </form>
+          </div>
     </div>
     <div class="cf-wh fixed-banner" id="fixed-banner">
       <div id="isChoose">5</div>
@@ -43,5 +43,46 @@
     </div>
     <script src="/javascripts/choose.js"></script>
     <script src="/vendor/bootstrap.js"></script>
+    <script>
+      const loadDoc=(url,data,cb)=>{
+        if (window.XMLHttpRequest) {
+            //code for IE7+, Firefox, Chrome and Opera
+            xhr = new XMLHttpRequest();
+        }else {
+            //code for IE6, IE5
+            xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xhr.onreadystatechange = function() {
+          if(this.readyState == 4){
+            cb(this);
+          }
+        };
+        xhr.open("POST",url,true);
+        xhr.setRequestHeader("cache-control", "no-cache");
+        xhr.setRequestHeader("content-type", "application/json;charset=UTF-8");
+        xhr.send(JSON.stringify(data));
+      }
+  </script>
+  <script>
+      const checkErrorLogin = document.getElementById("checkErrorLogin")
+      const login_now = document.getElementById("login_now")
+      login_now.addEventListener("click", e=>{
+          const username = document.getElementById("username").value,
+              password = document.getElementById("password").value;
+          if(username == "" || password == ""){
+              return checkError.innerHTML ="Tài khoản hoặc mật khẩu không đúng"
+          }
+          let data = { username, password }
+          let url = "/login"
+          loadDoc(url,data, res => {
+            if(res.status == 401){
+              checkErrorLogin.innerHTML = JSON.parse(res.response).message
+            }else{
+              window.location.href = "/"
+            }
+          })
+          e.preventDefault();
+      })
+  </script> <!-- Slide -->
   </body>
 </html>

@@ -42,7 +42,7 @@ UserSchema.statics.authenticate = function(username, password, callback) {
     if (err) {
       return callback(err)
     } else if (!user) {
-      var err = new Error('User not found.');
+      var err = new Error('Tài khoản không hợp lệ');
       err.status = 401;
       return callback(err);
     }
@@ -53,7 +53,7 @@ UserSchema.statics.authenticate = function(username, password, callback) {
       if (result === true) {
         return callback(null, user);
       } else {
-        return callback(new Error('Error'))
+        return callback(new Error('Tài khoản không hợp lệ'))
       }
 
     })
