@@ -67,6 +67,7 @@
       const checkErrorLogin = document.getElementById("checkErrorLogin")
       const login_now = document.getElementById("login_now")
       login_now.addEventListener("click", e=>{
+          checkErrorLogin.innerHTML = ""
           const username = document.getElementById("username").value,
               password = document.getElementById("password").value;
           if(username == "" || password == ""){
