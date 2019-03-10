@@ -75,7 +75,7 @@
           let data = { username, password }
           let url = "/login"
           loadDoc(url,data, res => {
-            if(res.status == 401){
+            if(res.status == 401 || res.status == 500){
               checkErrorLogin.innerHTML = JSON.parse(res.response).message
             }else{
               window.location.href = "/"
