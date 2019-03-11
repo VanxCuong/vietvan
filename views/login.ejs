@@ -23,8 +23,14 @@
                   </div>
                 </div>
               </div>
-              <div id="checkErrorLogin" style="text-align: center;color: #de2020;padding: 5px;"></div>
             </div>
+            <div class="form-check">
+              <input  type="checkbox" id="type">
+              <label class="form-check-label" for="defaultCheck1">
+                Nhấp để sử dụng mật khẩu thường khi đăng nhập
+              </label>
+            </div>
+            <div id="checkErrorLogin" style="text-align: center;color: #de2020;padding: 5px;"></div>
             <div class="text-xs-center">
               <div class="btn btn-primary" id="login_now">Đăng nhập</div>
             </div>
@@ -67,22 +73,23 @@
       const checkErrorLogin = document.getElementById("checkErrorLogin")
       const login_now = document.getElementById("login_now")
       login_now.addEventListener("click", e=>{
-          checkErrorLogin.innerHTML = ""
-          const username = document.getElementById("username").value,
-              password = document.getElementById("password").value;
-          if(username == "" || password == ""){
-              return checkError.innerHTML ="Tài khoản hoặc mật khẩu không đúng"
+        let type = document.querySelector("#type").checked ? 1 : 0
+        checkErrorLogin.innerHTML = ""
+        const username = document.getElementById("username").value,
+            password = document.getElementById("password").value;
+        if(username == "" || password == ""){
+            return checkError.innerHTML ="Tài khoản hoặc mật khẩu không đúng"
+        }
+        let data = { username, password, type }
+        let url = "/login"
+        loadDoc(url,data, res => {
+          if(res.status == 401 || res.status == 500){
+            checkErrorLogin.innerHTML = JSON.parse(res.response).message
+          }else{
+            window.location.href = "/"
           }
-          let data = { username, password }
-          let url = "/login"
-          loadDoc(url,data, res => {
-            if(res.status == 401 || res.status == 500){
-              checkErrorLogin.innerHTML = JSON.parse(res.response).message
-            }else{
-              window.location.href = "/"
-            }
-          })
-          e.preventDefault();
+        })
+        e.preventDefault();
       })
   </script> <!-- Slide -->
   </body>

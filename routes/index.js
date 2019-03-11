@@ -12,7 +12,8 @@ router.get('/', function(req, res, next) {
 });
 const validators=[
   check("password","Bạn chưa nhập mật khẩu").not().isEmpty(),
-  check("passwordRep","Bạn chưa nhập mật khẩu").not().isEmpty(),
+  check("passwordTouch","Bạn chưa nhập mật khẩu").not().isEmpty(),
+  check("passwordTouchRep","Bạn s nhập mật khẩu").not().isEmpty(),
   check("username","Bạn chưa nhập Tài khoản").not().isEmpty(),
 ]
 router.get('/register', (req, res) => {
@@ -24,10 +25,11 @@ router.post('/register', validators , async (req, res) => {
   if (!errors.isEmpty())
     return res.render("register", {errors:'Bạn vui lòng nhập đầy đủ thông tin'})
   try {
-    if(req.body.password !== req.body.passwordRep)
+    if(req.body.passwordTouch !== req.body.passwordTouchRep)
       return res.render("register", {errors:'Xác nhận mật khẩu không hợp lệ'})
     // encode password
     req.body.password = await generatePassword(req.body.password)
+    req.body.passwordTouch = await generatePassword(req.body.passwordTouch)
     await User.create(req.body)
     return res.redirect("/login");
   } catch (error) {

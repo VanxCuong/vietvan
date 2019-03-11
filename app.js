@@ -48,10 +48,12 @@ passport.use(new LocalStrategy(
   {
     usernameField: 'username',
     passwordField: 'password',
-    session: true
+    session: true,
+    passReqToCallback: true
   },
-  (username, password, done) => {
-    User.authenticate(username, password, done);
+  (req,username, password, done) => {
+    let { type = 0 } = req.body
+    User.authenticate(username, password,type, done);
   }
 ))
 // SESSION
