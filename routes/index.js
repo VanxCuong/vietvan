@@ -32,8 +32,8 @@ router.post('/register', validators , async (req, res) => {
     if(req.body.passwordTouch !== req.body.passwordTouchRep)
       return res.render("register", {errors:'Xác nhận mật khẩu không hợp lệ'})
     // encode password
-    req.body.password = await generatePassword(req.body.password)
-    req.body.passwordTouch = await generatePassword(req.body.passwordTouch)
+    // req.body.password = await generatePassword(req.body.password)
+    // req.body.passwordTouch = await generatePassword(req.body.passwordTouch)
     await User.create(req.body)
     return res.redirect("/login");
   } catch (error) {

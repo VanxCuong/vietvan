@@ -51,27 +51,37 @@ UserSchema.statics.authenticate = function(username, password,type, callback) {
       return callback(err);
     }
     if(type == 0 ){
-      bcrypt.compare(password, user.passwordTouch, function(err, result) {
-        if (err) {
-          return callback(err)
-        }
-        if (result === true) {
-          return callback(null, user);
-        } else {
-          return callback(new Error('Tài khoản không hợp lệ'))
-        }
-      })
+      if(password === user.passwordTouch){
+        return callback(null, user);
+      }else{
+        return callback(new Error('Tài khoản không hợp lệ'))
+      }
+      // bcrypt.compare(password, user.passwordTouch, function(err, result) {
+      //   if (err) {
+      //     return callback(err)
+      //   }
+      //   if (result === true) {
+      //     return callback(null, user);
+      //   } else {
+      //     return callback(new Error('Tài khoản không hợp lệ'))
+      //   }
+      // })
     }else{
-      bcrypt.compare(password, user.password, function(err, result) {
-        if (err) {
-          return callback(err)
-        }
-        if (result === true) {
-          return callback(null, user);
-        } else {
-          return callback(new Error('Tài khoản không hợp lệ'))
-        }
-      })
+      if(password === user.password){
+        return callback(null, user);
+      }else{
+        return callback(new Error('Tài khoản không hợp lệ'))
+      }
+      // bcrypt.compare(password, user.password, function(err, result) {
+      //   if (err) {
+      //     return callback(err)
+      //   }
+      //   if (result === true) {
+      //     return callback(null, user);
+      //   } else {
+      //     return callback(new Error('Tài khoản không hợp lệ'))
+      //   }
+      // })
     }
   });
 }
