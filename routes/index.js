@@ -8,7 +8,11 @@ const passport = require('passport')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { user : req.user })
+  try {
+    res.render('index', { user : req.user })
+  } catch (error) {
+    console.log('error',error);
+  }
 });
 const validators=[
   check("password","Bạn chưa nhập mật khẩu").not().isEmpty(),
